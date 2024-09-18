@@ -1,0 +1,14 @@
+@import "./utils/globals.scss";
+
+* {
+    font-family: $default-font;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    font-family: $default-font;
+}
