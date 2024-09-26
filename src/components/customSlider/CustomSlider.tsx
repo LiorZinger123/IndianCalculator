@@ -1,22 +1,19 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { Slider } from "@mui/material";
 import { FormContext } from "../form/Form";
-import "./formSlider.scss";
+import { green } from "../../utils/globals";
+import "./customSlider.scss";
 
-interface FormSliderProps {
+interface CustomSliderProps {
     label: string;
     min: number;
     max: number;
 }
 
-const FormSlider = ({ label, min, max }: FormSliderProps) => {
-    const [sliderValue, setSliderValue] = useState<number>(min);
-    const formData = useContext(FormContext)?.formData;
-    const setFormData = useContext(FormContext)?.setFormData;
+const CustomSlider = ({ label, min, max }: CustomSliderProps) => {
+    const { formData, setFormData } = useContext(FormContext);
 
     const handleChange = (e: Event, newValue: number | number[]) => {
-        setSliderValue(newValue as number);
-
         if (formData && setFormData) {
             if (label === "age")
                 setFormData({ ...formData, age: newValue as number });
@@ -27,9 +24,9 @@ const FormSlider = ({ label, min, max }: FormSliderProps) => {
 
     return (
         <div className='formSlider'>
-            <span className='slider-value'>{sliderValue}</span>
+            <span className='slider-value'>{formData && formData[label]}</span>
             <Slider
-                value={sliderValue}
+                value={formData ? (formData[label] as number) : 0}
                 min={min}
                 max={max}
                 onChange={handleChange}
@@ -49,13 +46,17 @@ const FormSlider = ({ label, min, max }: FormSliderProps) => {
                             boxShadow: "none",
                         },
                     },
+                    "& .MuiSlider-thumb:focus, & .MuiSlider-thumb.Mui-focusVisible, & .MuiSlider-thumb:hover":
+                        {
+                            boxShadow: "none",
+                        },
                     "& .MuiSlider-track": {
                         height: 8,
-                        color: "#09f534",
+                        color: green,
                     },
                     "& .MuiSlider-rail": {
                         height: 8,
-                        color: "#09f534",
+                        color: green,
                     },
                 }}
             />
@@ -63,4 +64,4 @@ const FormSlider = ({ label, min, max }: FormSliderProps) => {
     );
 };
 
-export default FormSlider;
+export default CustomSlider;

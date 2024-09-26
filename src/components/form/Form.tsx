@@ -1,8 +1,13 @@
-import { createContext, useState } from "react";
-import FormSelect from "../formSelect/FormSelect";
-import FormSlider from "../formSlider/FormSlider";
-import FormButtons from "../formButtoms/FormButtons";
+import React, { useState, createContext } from "react";
+import { Dialog } from "@mui/material";
+import FormRow from "../formRow/FormRow";
+import Buttons from "../buttons/Buttons";
+import CustomSelect from "../customSelect/CustomSelect";
+import CustomSlider from "../customSlider/CustomSlider";
 import ImageButtons from "../imageButtons/ImageButtons";
+import CalculateIndians from "../calculateIndians/CalculateIndians";
+import { calculate } from "../../utils/helper";
+import { defaultFormData } from "../../utils/globals";
 import { FormData, FormContextType } from "../../utils/types";
 import "./form.scss";
 
@@ -12,15 +17,9 @@ export const FormContext = createContext<FormContextType>({
 });
 
 const Form = () => {
-    const [formData, setFormData] = useState<FormData>({
-        age: 14,
-        height: 130,
-        hairColor: "Long",
-        hairLength: "long",
-        eyeColor: "blue",
-        beard: "none",
-        body: "muscalar",
-    });
+    const [formData, setFormData] = useState<FormData>(defaultFormData);
+    const [openDialog, setOpenDialog] = useState<boolean>(false);
+    const [result, setResult] = useState<number>(0);
     const beardsOptions = [
         { src: "https://kamelrechner.eu/img/beard-none.png", value: "none" },
         { src: "https://kamelrechner.eu/img/beard-small.png", value: "small" },
@@ -36,43 +35,98 @@ const Form = () => {
         { src: "https://kamelrechner.eu/img/body-3.png", value: "fat" },
     ];
 
+    const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setOpenDialog(true);
+        setResult(calculate(formData));
+    };
+
+    const closeDialog = () => {
+        setOpenDialog(false);
+        setFormData(defaultFormData);
+    };
+
+    const handleReset = () => {
+        setOpenDialog(false);
+        setFormData(defaultFormData);
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    };
+
     return (
         <FormContext.Provider
             value={{ formData: formData, setFormData: setFormData }}
         >
-            <form>
-                <div className='form-row'>
-                    <label>Age</label>
-                    <FormSlider label='age' min={14} max={70} />
-                </div>
-                <div className='form-row'>
-                    <label>Height</label>
-                    <FormSlider label='height' min={130} max={220} />
-                </div>
-                <div className='form-row'>
-                    <label>Hair Color</label>
-                    <FormSelect />
-                </div>
-                <div className='form-row'>
-                    <label>Hair Lenght</label>
-                    <FormButtons
-                        options={["long", "middle", "short", "bald"]}
-                    />
-                </div>
-                <div className='form-row'>
-                    <label>Eye Color</label>
-                    <FormButtons options={["blue", "green", "brown", "gray"]} />
-                </div>
-                <div className='form-row'>
-                    <label>Beard</label>
-                    <ImageButtons options={beardsOptions} label='beard' />
-                </div>
-                <div className='form-row'>
-                    <label>Body</label>
-                    <ImageButtons options={bodyOptions} label='body' />
-                </div>
-                <button className='calculate-btn'>Calculate</button>
+            <form onSubmit={handleClick}>
+                <h1>Indians Calculator</h1>
+                <FormRow
+                    label='Gender'
+                    child={
+                        <Buttons
+                            label='gender'
+                            options={["male", "female", "other"]}
+                        />
+                    }
+                />
+                <FormRow
+                    label='Age'
+                    child={<CustomSlider label='age' min={14} max={70} />}
+                />
+                <FormRow
+                    label='Height'
+                    child={<CustomSlider label='height' min={130} max={220} />}
+                />
+                <FormRow label='Hair Color' child={<CustomSelect />} />
+                <FormRow
+                    label='Hair Lenght'
+                    child={
+                        <Buttons
+                            label='hairLength'
+                            options={["long", "middle", "short", "bald"]}
+                        />
+                    }
+                />
+                <FormRow
+                    label='Eye Color'
+                    child={
+                        <Buttons
+                            label='eyeColor'
+                            options={["blue", "green", "brown", "black"]}
+                        />
+                    }
+                />
+                <FormRow
+                    label='Beard'
+                    child={
+                        <ImageButtons options={beardsOptions} label='beard' />
+                    }
+                />
+                <FormRow
+                    label='Body'
+                    child={<ImageButtons options={bodyOptions} label='body' />}
+                />
+                <button className='custom-btn'>Calculate</button>
             </form>
+            <Dialog
+                open={openDialog}
+                fullWidth={true}
+                maxWidth={false}
+                onClose={closeDialog}
+                sx={{
+                    "& .MuiDialog-paper": {
+                        width: "40%",
+                        height: "35%",
+                    },
+                }}
+            >
+                <CalculateIndians
+                    result={result}
+                    handleReset={handleReset}
+                    setOpenDialog={setOpenDialog}
+                />
+            </Dialog>
         </FormContext.Provider>
     );
 };

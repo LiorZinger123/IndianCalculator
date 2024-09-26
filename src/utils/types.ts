@@ -1,6 +1,7 @@
 import React from "react";
 
 export interface FormData {
+    gender: string;
     age: number;
     height: number;
     hairColor: string;
@@ -8,6 +9,7 @@ export interface FormData {
     eyeColor: string;
     beard: string;
     body: string;
+    [key: string]: string | number | undefined;
 }
 
 export interface FormContextType {

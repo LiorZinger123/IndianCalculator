@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { Button } from "@mui/material";
 import { FormContext } from "../form/Form";
 import { ImageButton } from "../../utils/types";
@@ -10,13 +10,9 @@ const ImageButtons = ({
     options: ImageButton[];
     label: string;
 }) => {
-    const [imageButton, setImageButton] = useState(options[0].value);
-    const formData = useContext(FormContext)?.formData;
-    const setFormData = useContext(FormContext)?.setFormData;
+    const { formData, setFormData } = useContext(FormContext);
 
     const handleChange = (imageButton: string) => {
-        setImageButton(imageButton);
-
         if (formData && setFormData) {
             if (label === "beard")
                 setFormData({ ...formData, beard: imageButton });
@@ -31,13 +27,20 @@ const ImageButtons = ({
                 <Button
                     key={option.value}
                     variant={
-                        option.value === imageButton ? "contained" : "outlined"
+                        formData && option.value === formData[label]
+                            ? "contained"
+                            : "outlined"
                     }
                     onClick={() => handleChange(option.value)}
                     sx={{
-                        color: option.value !== imageButton ? "#09f534" : null,
+                        color:
+                            formData && option.value !== formData[label]
+                                ? "#09f534"
+                                : null,
                         backgroundColor:
-                            option.value === imageButton ? "#09f534" : "white",
+                            formData && option.value === formData[label]
+                                ? "#09f534"
+                                : "white",
                         borderColor: "#09f534",
                     }}
                 >

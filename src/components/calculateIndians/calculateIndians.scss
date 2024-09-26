@@ -1,0 +1,44 @@
+.result-dialog {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+span {
+    font-size: 20px;
+}
+
+@property --num {
+    syntax: "<integer>";
+    inherits: true;
+    initial-value: 0;
+}
+
+@property --result {
+    syntax: "<integer>";
+    inherits: true;
+    initial-value: 50;
+}
+
+.result {
+    &.animate::before {
+        counter-reset: my-counter var(--num);
+        content: counter(my-counter);
+        animation: count 2s ease-in-out forwards;
+    }
+}
+
+@keyframes count {
+    to {
+        --num: var(--result);
+    }
+}
+
+.close-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+}

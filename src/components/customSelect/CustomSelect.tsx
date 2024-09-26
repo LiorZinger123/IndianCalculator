@@ -1,39 +1,37 @@
 import { useState, useContext } from "react";
 import { FormContext } from "../form/Form";
 import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import { green, lightGreen } from "../../utils/globals";
 
-const FormSelect = () => {
-    const [selectValue, setSelectValue] = useState("black");
-    const formData = useContext(FormContext)?.formData;
-    const setFormData = useContext(FormContext)?.setFormData;
+const CustomSelect = () => {
+    const { formData, setFormData } = useContext(FormContext);
 
     const handleChange = (e: SelectChangeEvent<string>) => {
-        setSelectValue(e.target.value);
-
         if (formData && setFormData)
             setFormData({ ...formData, hairColor: e.target.value });
     };
 
     return (
         <Select
-            value={selectValue}
+            value={formData ? formData.hairColor : ""}
             onChange={handleChange}
             MenuProps={{
                 disableScrollLock: true,
                 PaperProps: {
                     sx: {
                         "& .MuiMenuItem-root": {
+                            fontFamily: "Verdana, Geneva, Tahoma, sans-serif",
                             "&.Mui-selected": {
-                                backgroundColor: "lightgreen",
+                                backgroundColor: green,
                                 color: "white",
                                 "&:hover": {
-                                    backgroundColor: "#09f534",
-                                    color: "#ffffff",
+                                    backgroundColor: green,
+                                    color: "white",
                                 },
                             },
                             "&:hover": {
-                                backgroundColor: "#09f534",
-                                color: "#ffffff",
+                                backgroundColor: green,
+                                color: "white",
                             },
                         },
                     },
@@ -41,25 +39,26 @@ const FormSelect = () => {
             }}
             sx={{
                 width: "85%",
+                fontFamily: "Verdana, Geneva, Tahoma, sans-serif",
                 ".MuiOutlinedInput-notchedOutline": {
-                    borderColor: "lightgreen",
+                    borderColor: lightGreen,
                 },
                 "&:hover .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "#09f534",
+                    borderColor: green,
                     borderWidth: "2px",
                 },
                 "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "#09f534",
+                    borderColor: green,
                 },
             }}
         >
+            <MenuItem value='blonde'>Blonde</MenuItem>
             <MenuItem value='black'>Black</MenuItem>
             <MenuItem value='brown'>Brown</MenuItem>
-            <MenuItem value='blonde'>Blonde</MenuItem>
             <MenuItem value='gray'>Gray</MenuItem>
             <MenuItem value='bald'>Bald</MenuItem>
         </Select>
     );
 };
 
-export default FormSelect;
+export default CustomSelect;
