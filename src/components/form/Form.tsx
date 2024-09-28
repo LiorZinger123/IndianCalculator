@@ -1,10 +1,10 @@
 import React, { useState, createContext } from "react";
 import { Dialog } from "@mui/material";
 import FormRow from "../formRow/FormRow";
-import Buttons from "../buttons/Buttons";
 import CustomSelect from "../customSelect/CustomSelect";
 import CustomSlider from "../customSlider/CustomSlider";
 import ImageButtons from "../imageButtons/ImageButtons";
+import CustomButtons from "../customButtons/CustomButtons";
 import CalculateIndians from "../calculateIndians/CalculateIndians";
 import { calculate } from "../../utils/helper";
 import { defaultFormData } from "../../utils/globals";
@@ -64,7 +64,7 @@ const Form = () => {
                 <FormRow
                     label='Gender'
                     child={
-                        <Buttons
+                        <CustomButtons
                             label='gender'
                             options={["male", "female", "other"]}
                         />
@@ -82,7 +82,7 @@ const Form = () => {
                 <FormRow
                     label='Hair Lenght'
                     child={
-                        <Buttons
+                        <CustomButtons
                             label='hairLength'
                             options={["long", "middle", "short", "bald"]}
                         />
@@ -91,7 +91,7 @@ const Form = () => {
                 <FormRow
                     label='Eye Color'
                     child={
-                        <Buttons
+                        <CustomButtons
                             label='eyeColor'
                             options={["blue", "green", "brown", "black"]}
                         />
@@ -107,19 +107,14 @@ const Form = () => {
                     label='Body'
                     child={<ImageButtons options={bodyOptions} label='body' />}
                 />
-                <button className='custom-btn'>Calculate</button>
+                <button className='form-btn'>Calculate</button>
             </form>
             <Dialog
                 open={openDialog}
                 fullWidth={true}
                 maxWidth={false}
                 onClose={closeDialog}
-                sx={{
-                    "& .MuiDialog-paper": {
-                        width: "40%",
-                        height: "35%",
-                    },
-                }}
+                className='form-dialog'
             >
                 <CalculateIndians
                     result={result}

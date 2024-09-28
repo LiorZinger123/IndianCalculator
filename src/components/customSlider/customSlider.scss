@@ -1,12 +1,51 @@
+@import "../../utils/globals.scss";
+
 .formSlider {
     width: 80%;
     display: flex;
+
+    @media only screen and (width <= $laptop-width) {
+        width: 90%;
+    }
+}
+
+.custom-slider {
+    & .MuiSlider-thumb {
+        width: 30px;
+        height: 30px;
+        color: #f3efef;
+        outline: none;
+        &:active {
+            color: #e4e8e5;
+        }
+        &.Mui-focusVisible {
+            outline: none;
+            box-shadow: none;
+        }
+    }
+
+    & .MuiSlider-thumb:focus,
+    & .MuiSlider-thumb.Mui-focusVisible,
+    & .MuiSlider-thumb:hover {
+        box-shadow: none;
+    }
+
+    & .MuiSlider-track {
+        height: 8px;
+        color: $green;
+    }
+
+    & .MuiSlider-rail {
+        height: 8px;
+        color: $green;
+    }
 }
 
 .slider-value {
     width: fit-content;
     color: #666;
     margin-right: 30px;
+    align-self: center;
     font-size: 25px;
     font-weight: 200;
 }

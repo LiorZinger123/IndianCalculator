@@ -1,7 +1,7 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { FormContext } from "../form/Form";
 import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import { green, lightGreen } from "../../utils/globals";
+import "./customSelect.scss";
 
 const CustomSelect = () => {
     const { formData, setFormData } = useContext(FormContext);
@@ -13,42 +13,17 @@ const CustomSelect = () => {
 
     return (
         <Select
+            className='custom-select'
             value={formData ? formData.hairColor : ""}
             onChange={handleChange}
-            MenuProps={{
-                disableScrollLock: true,
-                PaperProps: {
-                    sx: {
-                        "& .MuiMenuItem-root": {
-                            fontFamily: "Verdana, Geneva, Tahoma, sans-serif",
-                            "&.Mui-selected": {
-                                backgroundColor: green,
-                                color: "white",
-                                "&:hover": {
-                                    backgroundColor: green,
-                                    color: "white",
-                                },
-                            },
-                            "&:hover": {
-                                backgroundColor: green,
-                                color: "white",
-                            },
-                        },
-                    },
-                },
+            classes={{
+                select: "custom-select",
             }}
-            sx={{
-                width: "85%",
-                fontFamily: "Verdana, Geneva, Tahoma, sans-serif",
-                ".MuiOutlinedInput-notchedOutline": {
-                    borderColor: lightGreen,
-                },
-                "&:hover .MuiOutlinedInput-notchedOutline": {
-                    borderColor: green,
-                    borderWidth: "2px",
-                },
-                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    borderColor: green,
+            MenuProps={{
+                slotProps: {
+                    paper: {
+                        className: "custom-select-paper",
+                    },
                 },
             }}
         >

@@ -1,12 +1,47 @@
 $default-font: Verdana, Geneva, Tahoma, sans-serif;
 
-.buttons {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
+$green: #09f534;
+$light-green: #7aeb7a;
+
+$large-laptop-width: 1440px;
+$buttons-grid-max-width: 1250px;
+$laptop-width: 1024px;
+$tablet-width: 768px;
+$large-mobile-width: 425px;
+$small-mobile-width: 320px;
+
+h1 {
+    background-color: #02a049;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    color: transparent;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-.custom-btn {
+.custom-buttons {
+    width: 80%;
+    justify-content: space-around;
+
+    @media only screen and (width >= $buttons-grid-max-width) {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    @media only screen and (width <= $buttons-grid-max-width) {
+        display: grid;
+        grid-template-columns: repeat(2, calc(50% - 10px));
+        row-gap: 20px;
+        column-gap: 20px;
+    }
+
+    @media only screen and (width >= $large-mobile-width) and (width < $laptop-width) {
+        width: 90%;
+    }
+}
+
+.form-btn {
     background-color: #09f534;
     width: 180px;
     height: 60px;

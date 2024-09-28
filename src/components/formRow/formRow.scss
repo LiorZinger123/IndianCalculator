@@ -1,3 +1,5 @@
+@import "../../utils/globals.scss";
+
 .form-row {
     display: flex;
     border-bottom: 2px solid #dedbdb;
@@ -7,5 +9,21 @@
         width: 20%;
         font-size: 25px;
         font-weight: 200;
+
+        @media only screen and (width >= $laptop-width) and (width < $large-laptop-width) {
+            display: inline-block;
+            white-space: pre-wrap;
+            word-spacing: 100vw;
+        }
+
+        @media only screen and (width <= $laptop-width) {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    }
+
+    @media only screen and (width <= $laptop-width) {
+        flex-direction: column;
+        align-items: center;
     }
 }

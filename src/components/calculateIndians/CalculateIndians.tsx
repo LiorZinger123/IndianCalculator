@@ -1,4 +1,5 @@
-import { useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
+import Slider from "@mui/material/Slider";
 import CloseIcon from "@mui/icons-material/Close";
 import "./calculateIndians.scss";
 
@@ -13,26 +14,54 @@ const CalculateIndians = ({
     handleReset,
     setOpenDialog,
 }: CalculateIndiansProps) => {
+    const [sliderValue, setSliderValue] = useState<number>(0);
     const resultRef = useRef<HTMLSpanElement | null>(null);
 
     useEffect(() => {
+        const duration = 2000;
+        const interval = 50;
+        const totalSteps = duration / interval;
+        const increment = result / totalSteps;
+
+        let currentStep = 0;
+        const intervalId = setInterval(() => {
+            if (currentStep < totalSteps) {
+                setSliderValue((prevValue) =>
+                    Number(Math.min(prevValue + increment, result).toFixed(1)),
+                );
+                currentStep++;
+            } else {
+                clearInterval(intervalId);
+            }
+        }, interval);
+
         if (resultRef.current) {
             if (!resultRef.current.classList.contains("animate")) {
                 resultRef.current.style.setProperty("--result", `${result}`);
                 resultRef.current.classList.add("animate");
             }
         }
+        return () => {
+            clearInterval(intervalId);
+        };
     }, []);
 
     return (
-        <div className='result-dialog'>
-            <h1>congratulations</h1>
-            <div>
-                {/* <span>Your value is: </span> */}
-                <span className='result' ref={resultRef}></span>
-                {/* <Slider value /> */}
+        <div className='form-dialog-div'>
+            <h1>
+                {sliderValue !== result ? "Calculating..." : "Final Result:"}
+            </h1>
+            <div className='dialog-slider-div'>
+                <span className='result' ref={resultRef} />
+                <Slider
+                    className='custom-slider dialog-slider'
+                    value={sliderValue}
+                    min={0}
+                    max={100}
+                    disabled
+                />
             </div>
-            <button className='custom-btn' onClick={handleReset}>
+            <button className='form-btn' onClick={handleReset}>
                 Reset
             </button>
             <CloseIcon

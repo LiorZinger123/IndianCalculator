@@ -1,13 +1,38 @@
-.result-dialog {
+@import "../../utils/globals.scss";
+
+.form-dialog-div {
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+
+    h1 {
+        @media only screen and (width <= $small-mobile-width) {
+            font-size: 30px;
+        }
+    }
 }
 
-span {
-    font-size: 20px;
+.dialog-slider-div {
+    width: 80%;
+    display: flex;
+
+    .dialog-slider {
+        & .MuiSlider-thumb {
+            width: 50px;
+            height: 50px;
+            background-image: url("/src/images/Indian_Man_Face.png");
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            @media only screen and (width >= $large-laptop-width) {
+                width: 70px;
+                height: 70px;
+            }
+        }
+    }
 }
 
 @property --num {
@@ -23,6 +48,22 @@ span {
 }
 
 .result {
+    width: 4%;
+    margin-right: 30px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    bottom: 2px;
+
+    @media only screen and (width >= $large-laptop-width) {
+        font-size: 30px;
+    }
+
+    @media only screen and (width >= $laptop-width) and (width < $large-laptop-width) {
+        font-size: 25px;
+    }
+
     &.animate::before {
         counter-reset: my-counter var(--num);
         content: counter(my-counter);

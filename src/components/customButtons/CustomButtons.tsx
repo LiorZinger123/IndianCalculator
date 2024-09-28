@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import { Button } from "@mui/material";
 import { FormContext } from "../form/Form";
-import { green } from "../../utils/globals";
+import "./customButtons.scss";
 
 interface ButtonProps {
     label: string;
     options: string[];
 }
 
-const Buttons = ({ label, options }: ButtonProps) => {
+const CustomButtons = ({ label, options }: ButtonProps) => {
     const { formData, setFormData } = useContext(FormContext);
 
     const handleChange = (btn: string) => {
@@ -22,9 +22,14 @@ const Buttons = ({ label, options }: ButtonProps) => {
     };
 
     return (
-        <div className='buttons'>
+        <div className='custom-buttons'>
             {options.map((button) => (
                 <Button
+                    className={`custom-btn ${
+                        formData && button === formData[label]
+                            ? "selected-btn"
+                            : "unselected-btn"
+                    }`}
                     key={button}
                     variant={
                         formData && button === formData[label]
@@ -32,18 +37,6 @@ const Buttons = ({ label, options }: ButtonProps) => {
                             : "outlined"
                     }
                     onClick={() => handleChange(button)}
-                    sx={{
-                        width: "20%",
-                        color:
-                            formData && button === formData[label]
-                                ? "white"
-                                : green,
-                        backgroundColor:
-                            formData && button === formData[label]
-                                ? green
-                                : "white",
-                        borderColor: green,
-                    }}
                 >
                     {button}
                 </Button>
@@ -52,4 +45,4 @@ const Buttons = ({ label, options }: ButtonProps) => {
     );
 };
 
-export default Buttons;
+export default CustomButtons;

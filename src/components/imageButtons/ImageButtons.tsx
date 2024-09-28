@@ -22,7 +22,7 @@ const ImageButtons = ({
     };
 
     return (
-        <div className='buttons'>
+        <div className='custom-buttons'>
             {options.map((option) => (
                 <Button
                     key={option.value}

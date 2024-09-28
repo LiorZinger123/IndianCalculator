@@ -1,0 +1,43 @@
+@import "../../utils/globals.scss";
+
+.custom-select {
+    width: 80%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+
+    @media only screen and (width <= $laptop-width) {
+        width: 90%;
+    }
+
+    .MuiOutlinedInput-notchedOutline {
+        border-color: $light-green;
+    }
+
+    &.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+        border-color: $green;
+        border-width: 2px;
+    }
+
+    &.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+        border-color: $green;
+    }
+}
+
+.custom-select-paper {
+    & .MuiMenuItem-root {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+        &.Mui-selected {
+            background: $light-green !important;
+            color: white;
+            &:hover {
+                background-color: $green !important;
+                color: white;
+            }
+        }
+
+        &:hover {
+            background-color: $green;
+            color: white;
+        }
+    }
+}

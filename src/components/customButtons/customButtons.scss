@@ -1,0 +1,22 @@
+@import "../../utils/globals.scss";
+
+.custom-btn {
+    border-color: $green !important;
+
+    @media only screen and (width >= $buttons-grid-max-width) {
+        width: 20%;
+    }
+
+    @media only screen and (width <= $buttons-grid-max-width) {
+        width: 100%;
+    }
+}
+
+.selected-btn {
+    color: white !important;
+    background-color: $green !important;
+}
+
+.unselected-btn {
+    color: $green !important;
+}

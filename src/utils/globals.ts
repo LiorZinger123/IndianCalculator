@@ -6,8 +6,5 @@ export const defaultFormData = {
     hairLength: "long",
     eyeColor: "blue",
     beard: "none",
-    body: "muscalar",
+    body: "muscular",
 };
-
-export const green = "#09f534";
-export const lightGreen = "#7aeb7a";

@@ -1,4 +1,3 @@
-import React from "react";
 import { FormData } from "./types";
 
 export const calculate = (formData: FormData): number => {
