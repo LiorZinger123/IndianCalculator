@@ -10,12 +10,6 @@
         font-size: 25px;
         font-weight: 200;
 
-        @media only screen and (width >= $laptop-width) and (width < $large-laptop-width) {
-            display: inline-block;
-            white-space: pre-wrap;
-            word-spacing: 100vw;
-        }
-
         @media only screen and (width <= $laptop-width) {
             width: 100%;
             margin-bottom: 20px;
