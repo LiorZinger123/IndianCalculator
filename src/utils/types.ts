@@ -1,6 +1,7 @@
 import React from "react";
 
 export interface FormData {
+    name: string;
     gender: string;
     age: number;
     height: number;

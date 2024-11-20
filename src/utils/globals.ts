@@ -1,4 +1,5 @@
 export const defaultFormData = {
+    name: "",
     gender: "male",
     age: 14,
     height: 130,

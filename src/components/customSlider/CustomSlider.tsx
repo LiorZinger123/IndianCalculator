@@ -12,7 +12,7 @@ interface CustomSliderProps {
 const CustomSlider = ({ label, min, max }: CustomSliderProps) => {
     const { formData, setFormData } = useContext(FormContext);
 
-    const handleChange = (e: Event, newValue: number | number[]) => {
+    const handleChange = (_: Event, newValue: number | number[]) => {
         if (formData && setFormData) {
             if (label === "age")
                 setFormData({ ...formData, age: newValue as number });

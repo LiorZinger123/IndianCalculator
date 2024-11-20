@@ -1,6 +1,7 @@
 import React, { useState, createContext } from "react";
 import { Dialog } from "@mui/material";
 import FormRow from "../formRow/FormRow";
+import CustomInput from "../customInput/CustomInput";
 import CustomSelect from "../customSelect/CustomSelect";
 import CustomSlider from "../customSlider/CustomSlider";
 import ImageButtons from "../imageButtons/ImageButtons";
@@ -61,6 +62,7 @@ const Form = () => {
         >
             <form onSubmit={handleClick}>
                 <h1>Indians Calculator</h1>
+                <FormRow label='Name' child={<CustomInput />} />
                 <FormRow
                     label='Gender'
                     child={

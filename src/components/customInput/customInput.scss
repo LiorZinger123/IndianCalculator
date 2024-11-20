@@ -1,0 +1,21 @@
+@import "../../utils/globals.scss";
+
+.custom-input {
+    width: 80%;
+    height: 40px;
+    padding: 0 10px;
+    border-radius: 5px;
+    border: 1px solid $light-green;
+    outline: none;
+    box-sizing: border-box;
+
+    &:hover,
+    &:focus {
+        border-color: $green;
+        border-width: 2px;
+    }
+
+    @media only screen and (width < $laptop-width) {
+        width: 90%;
+    }
+}

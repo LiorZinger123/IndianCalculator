@@ -27,7 +27,7 @@ const CalculateIndians = ({
         const intervalId = setInterval(() => {
             if (currentStep < totalSteps) {
                 setSliderValue((prevValue) =>
-                    Number(Math.min(prevValue + increment, result).toFixed(1)),
+                    Number(Math.min(prevValue + increment, result).toFixed(2)),
                 );
                 currentStep++;
             } else {
@@ -41,6 +41,7 @@ const CalculateIndians = ({
                 resultRef.current.classList.add("animate");
             }
         }
+
         return () => {
             clearInterval(intervalId);
         };
