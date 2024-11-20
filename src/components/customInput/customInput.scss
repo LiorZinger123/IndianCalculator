@@ -15,6 +15,12 @@
         border-width: 2px;
     }
 
+    &:-webkit-autofill,
+    &:-moz-autofill {
+        -webkit-box-shadow: 0 0 0 30px white inset !important;
+        -moz-box-shadow: 0 0 0 30px white inset !important;
+    }
+
     @media only screen and (width < $laptop-width) {
         width: 90%;
     }
