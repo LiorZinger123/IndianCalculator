@@ -1,16 +1,16 @@
-import React, { useState, createContext } from "react";
-import { Dialog } from "@mui/material";
-import FormRow from "../formRow/FormRow";
-import CustomInput from "../customInput/CustomInput";
-import CustomSelect from "../customSelect/CustomSelect";
-import CustomSlider from "../customSlider/CustomSlider";
-import ImageButtons from "../imageButtons/ImageButtons";
-import CustomButtons from "../customButtons/CustomButtons";
-import CalculateIndians from "../calculateIndians/CalculateIndians";
-import { calculate } from "../../utils/helper";
-import { defaultFormData } from "../../utils/globals";
-import { FormData, FormContextType } from "../../utils/types";
-import "./form.scss";
+import React, { useState, createContext } from 'react';
+import { Dialog } from '@mui/material';
+import FormRow from '../formRow/FormRow';
+import CustomInput from '../customInput/CustomInput';
+import CustomSelect from '../customSelect/CustomSelect';
+import CustomSlider from '../customSlider/CustomSlider';
+import ImageButtons from '../imageButtons/ImageButtons';
+import CustomButtons from '../customButtons/CustomButtons';
+import CalculateIndians from '../calculateIndians/CalculateIndians';
+import { calculate } from '../../utils/helper';
+import { defaultFormData } from '../../utils/globals';
+import { FormData, FormContextType } from '../../utils/types';
+import './form.scss';
 
 export const FormContext = createContext<FormContextType>({
     formData: undefined,
@@ -22,18 +22,18 @@ const Form = () => {
     const [openDialog, setOpenDialog] = useState<boolean>(false);
     const [result, setResult] = useState<number>(0);
     const beardsOptions = [
-        { src: "https://kamelrechner.eu/img/beard-none.png", value: "none" },
-        { src: "https://kamelrechner.eu/img/beard-small.png", value: "small" },
+        { src: 'https://kamelrechner.eu/img/beard-none.png', value: 'none' },
+        { src: 'https://kamelrechner.eu/img/beard-small.png', value: 'small' },
         {
-            src: "https://kamelrechner.eu/img/beard-middle.png",
-            value: "middle",
+            src: 'https://kamelrechner.eu/img/beard-middle.png',
+            value: 'middle',
         },
-        { src: "https://kamelrechner.eu/img/beard-full.png", value: "full" },
+        { src: 'https://kamelrechner.eu/img/beard-full.png', value: 'full' },
     ];
     const bodyOptions = [
-        { src: "https://kamelrechner.eu/img/body-1.png", value: "muscular" },
-        { src: "https://kamelrechner.eu/img/body-2.png", value: "skiny" },
-        { src: "https://kamelrechner.eu/img/body-3.png", value: "fat" },
+        { src: 'https://kamelrechner.eu/img/body-1.png', value: 'muscular' },
+        { src: 'https://kamelrechner.eu/img/body-2.png', value: 'skiny' },
+        { src: 'https://kamelrechner.eu/img/body-3.png', value: 'fat' },
     ];
 
     const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
@@ -52,7 +52,7 @@ const Form = () => {
         setFormData(defaultFormData);
         window.scrollTo({
             top: 0,
-            behavior: "smooth",
+            behavior: 'smooth',
         });
     };
 
@@ -68,7 +68,7 @@ const Form = () => {
                     child={
                         <CustomButtons
                             label='gender'
-                            options={["male", "female", "other"]}
+                            options={['male', 'female', 'other']}
                         />
                     }
                 />
@@ -82,11 +82,11 @@ const Form = () => {
                 />
                 <FormRow label='Hair Color' child={<CustomSelect />} />
                 <FormRow
-                    label='Hair Lenght'
+                    label='Hair Length'
                     child={
                         <CustomButtons
                             label='hairLength'
-                            options={["long", "middle", "short", "bald"]}
+                            options={['long', 'middle', 'short', 'bald']}
                         />
                     }
                 />
@@ -95,7 +95,7 @@ const Form = () => {
                     child={
                         <CustomButtons
                             label='eyeColor'
-                            options={["blue", "green", "brown", "black"]}
+                            options={['blue', 'green', 'brown', 'black']}
                         />
                     }
                 />
